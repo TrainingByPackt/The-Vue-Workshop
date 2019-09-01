@@ -1,0 +1,43 @@
+If we have followed the previous part of this Vue workshop,  we already know how to initiate a Vue project with Vue CLI. However, even if this is the first time we have met, Vue CLI still gives us straightforward guidance during the initiation process.
+
+We can start with:
+---
+vue create first-vue-app
+---
+The prompt will ask for information, follow the instruction, and we will have the very first application.
+
+Run the project by:
+---
+cd first-vue-app
+yarn serve
+---
+
+Please note that Vue CLI version 3.10.0 has a bug which causes our dev server runs with a new, random port number every time we run the project. Please follow the note at the end of this chapter to find a workaround.
+
+Before we dive into coding, give some time to plan is a good practice in programming. Below is a diagram of the application we are going to build.
+
+---
+Image
+---
+
+In the diagram, we have an App.vue component that wraps multiple Message.vue components, a text input, and a 'Send' button inside. We call the Message.vue components are the children of App.vue component.
+
+Create Message.vue component:
+---
+<template>
+  <div class="message-wrapper">
+    <p class="message-content">
+      This is the content
+      <small>12.8.2019</small>
+    </p>
+  </div>
+</template>
+
+<script>
+export default {
+};
+</script>
+
+<style lang="scss">
+</style>
+---
