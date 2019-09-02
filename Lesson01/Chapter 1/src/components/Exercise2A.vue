@@ -1,17 +1,11 @@
 <template>
   <div>
-    <h1>{{ title }}</h1>
+    <h1>My first component!</h1>
   </div>
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      title: 'My first component!',
-    }
-  },
-}
+export default {}
 </script>
 
 <style>
