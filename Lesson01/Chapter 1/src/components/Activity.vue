@@ -27,6 +27,20 @@
           Summary
           <textarea type="text" v-model="form.summary" />
         </label>
+
+        <label>
+          Skills
+          <input type="text" v-model="newSkill" />
+        </label>
+        <button @click="addItem('skills', 'newSkill')">+ Add</button>
+        <div
+          v-for="(item, n) in form.skills"
+          :key="`skillsPreview${n}`"
+          :class="$style.preview"
+        >
+          {{ item }}
+          <button @click="deleteItem('skills', n)">Delete</button>
+        </div>
       </div>
 
       <div :class="$style.formGroup">
@@ -180,6 +194,7 @@ export default {
   data() {
     return {
       showForm: true,
+      newSkill: '',
       newExperience: {
         company: '',
         title: '',
@@ -199,13 +214,16 @@ export default {
         name: '',
         title: '',
         summary: '',
+        skills: [],
         experience: [],
         education: [],
-        skills: [],
       },
     }
   },
 
+  /**
+   * Refer to Ex. 11 - Lifecycles
+   */
   mounted() {
     // Mimick we're getting the users data from an external source
     // and assiging it to the default form data
@@ -257,23 +275,15 @@ export default {
   },
 
   methods: {
+    /**
+     * Refer to Ex. 9 - Triggering Methods
+     */
     triggerPrint() {
       print()
     },
 
     toggleForm() {
       this.showForm = !this.showForm
-    },
-
-    /**
-     * @param {string} item         an experience or education form object
-     */
-    formatPreview(item) {
-      if (item.degree) {
-        return `${item.degree} / ${item.name}`
-      } else {
-        return `${item.company} / ${item.title}`
-      }
     },
 
     /**
@@ -290,6 +300,18 @@ export default {
      */
     addItem(key, objKey) {
       this.form[key].push(this[objKey])
+    },
+
+    /**
+     * Refer to Ex. 10 - Returning Methods
+     * @param {string} item         an experience or education form object
+     */
+    formatPreview(item) {
+      if (item.degree) {
+        return `${item.degree} / ${item.name}`
+      } else {
+        return `${item.company} / ${item.title}`
+      }
     },
   },
 }
