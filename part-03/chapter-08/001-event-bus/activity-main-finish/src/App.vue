@@ -17,6 +17,10 @@ export default {
     this.updateField()
     this.toggleEditableField()
   },
+  beforeDestroy() {
+    EventBus.$off('UPDATE_FIELD')
+    EventBus.$off('TOGGLE_EDITABLE_FIELD')
+  },
   data: function () {
     return {
       // This is the base state of the application

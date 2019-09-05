@@ -1,6 +1,10 @@
 <template>
   <div id="app">
-    <PropertyView @update-editable-field="updateEditableField" @input-updated="inputUpdated" :property="property" />
+    <PropertyView 
+      @update-editable-field="updateEditableField" 
+      @input-updated="inputUpdated" 
+      :property="property" 
+    />
   </div>
 </template>
 
@@ -35,6 +39,7 @@ export default {
   methods: {
     inputUpdated ({ text, editable, id }) {
       console.log(`phew here's the new value for ${id}:  ${text}`)
+      // create a clone of this.property so we don't mutate state directly
       const propertyCopy = Object.assign({}, this.property)
       // update the property copy's field with the changed text and editable values
       propertyCopy.field[id] = {
