@@ -1,12 +1,15 @@
 <template>
   <div id="app">
-    <PropertyView :property="property" />
+    <PropertyView 
+      @update-editable-field="updateEditableField" 
+      @input-updated="inputUpdated" 
+      :property="property" 
+    />
   </div>
 </template>
 
 <script>
 import PropertyView from './views/PropertyView.vue'
-import EventBus from './event-bus.js'
 
 export default {
   name: 'app',
@@ -14,8 +17,7 @@ export default {
     PropertyView
   },
   created () {
-    this.updateField()
-    this.toggleEditableField()
+    // created hook functions here ...
   },
   data: function () {
     return {
@@ -35,25 +37,21 @@ export default {
     }
   },
   methods: {
-    updateField () {
-      EventBus.$on('UPDATE_FIELD', ({ newValue, id }) => {
-        this.property.field[id].text = newValue
-      })
+    inputUpdated ({ text, editable, id }) {
+      console.log(`phew here's the new value for ${id}:  ${text}`)
+      // create a clone of this.property so we don't mutate state directly
+      const propertyCopy = Object.assign({}, this.property)
+      // update the property copy's field with the changed text and editable values
+      propertyCopy.field[id] = {
+        text,
+        editable
+      }
+      // we can safely update the property data
+      this.property = propertyCopy
     },
-    toggleEditableField () {
-      EventBus.$on('TOGGLE_EDITABLE_FIELD', ({ id, isEditable }) => {
-        // clone the property object so we don't mutate the property data directly.
-        let propertyClone = Object.assign({}, this.property)
-        // set all fields to not be editable
-        for (let key in propertyClone.field) {
-          propertyClone.field[key].editable = false
-        }
-        // highlight the clicked field
-        propertyClone.field[id].editable = isEditable
-        // safely set the property data
-        this.property = propertyClone
-      })
-    },
+    updateEditableField ({ id, isEditable }) {
+      this.property.field[id].editable = isEditable
+    }
   }
 }
 </script>

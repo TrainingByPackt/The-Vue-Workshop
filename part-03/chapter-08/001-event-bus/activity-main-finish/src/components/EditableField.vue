@@ -26,7 +26,7 @@ export default {
     field: {
       type: Object,
       required: true,
-      default: () => { return ({ name: '', text: '', editable: false }) }
+      default: () => { return ({ text: '', editable: false }) }
     },
     id: {
       type: String,
