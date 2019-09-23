@@ -1,6 +1,6 @@
 <template>
-  <button 
-    @click="updateData" 
+  <button
+    @click="updateValues"
     class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
     v-text="'Button Component'"
   />
@@ -11,8 +11,8 @@ import EventBus from '../event-bus'
 
 export default {
   methods: {
-    updateData  () {
-      EventBus.$emit('update-data', {
+    updateValues () {
+      EventBus.$emit('update-values', {
         name: 'John Doe',
         age: 30,
         favPets: ['dog', 'turtle',  'rabbit']
