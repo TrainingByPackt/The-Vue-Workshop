@@ -49,7 +49,6 @@ a {
   display: inline-block;
   background: rgb(235, 50, 50);
   border-radius: 10px;
-  font-size: 10px;
   color: white;
   padding: 5px 10px;
   text-decoration: none;
